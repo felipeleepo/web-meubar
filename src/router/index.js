@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 import Mesas from '../views/Mesas.vue'
+import SolicitarPedido from '../views/pedidos/SolicitarPedido.vue'
+import Cardapio from '../views/Cardapio.vue'
 
 Vue.use(VueRouter)
 
@@ -12,14 +13,14 @@ const routes = [
     component: Mesas
   },
   {
-    path: '/about',
-    name: 'Home',
-    component: Home
+    path: '/pedidos',
+    name: 'SolicitarPedido',
+    component: SolicitarPedido
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/cardapio',
+    name: 'Cardápio',
+    component: Cardapio
   }
 ]
 

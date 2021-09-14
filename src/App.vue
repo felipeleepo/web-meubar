@@ -54,8 +54,8 @@
         items: 
           [
             { title: 'Mesas', icon: 'mdi-view-dashboard', to: '/' },
-            { title: 'Photos', icon: 'mdi-image' },
-            { title: 'About', icon: 'mdi-help-box' },
+            { title: 'Pedidos', icon: 'mdi-image', to: '/pedidos' },
+            { title: 'About', icon: 'mdi-help-box', to: '/cardapio' },
           ] 
         })
   }
