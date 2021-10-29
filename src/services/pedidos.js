@@ -4,7 +4,7 @@ export default {
     verItens : () => {
         return http.get('itens')
     },
-    solicitarPedido : () => {
-        return http.post('pedidos')
+    solicitarPedido : (pedido) => {
+        return http.post('pedidos', pedido)
     }
 }

@@ -7,6 +7,7 @@
       item-key="nome"
       sort-by="nome"
       group-by="secao"
+      show-group-by 
       class="elevation-1"
       :hide-default-footer="true">
 
@@ -22,13 +23,21 @@
                         </v-btn>
                     </template>
 
-                    <ListarItens :itens="itens" @emit-click="solicitarPedido"/>
+                    <ListarItens :itens="itens" :grupos="grupos" :mesas="mesas" @emit-click="solicitarPedido"/>
                 </v-dialog>
     
             </v-toolbar>
            
         </template>
-
+        <template v-slot:group.header="{ group, headers, toggle, isOpen }">
+            <td :colspan="headers.length">
+                <v-btn @click="toggle" x-small icon :ref="group">
+                    <v-icon v-if="isOpen">mdi-plus</v-icon>
+                    <v-icon v-else>mdi-minus</v-icon>
+                </v-btn>
+                <span class="mx-5 font-weight-bold">{{ group }}</span>
+            </td> 
+        </template>
         <template v-slot:item.qtd="{ item }">
             <v-row align="center">
                 <v-col cols="9"></v-col>
@@ -50,6 +59,9 @@
 <script>
   import ListarItens from '../../components/ListarItens.vue'
   import Itens from '../../services/pedidos.js'
+  import Mesas from '../../services/mesas.js'
+  import Grupos from '../../services/grupos.js'
+  import Pedidos from '../../services/pedidos.js'
   export default {
     components:{
       ListarItens
@@ -60,17 +72,25 @@
         dialog: false,
         headers: [
           { text: 'Item', value: 'nome', align: 'start', groupable: false, sortable: false},
-          { text: 'Categoria', value: 'secao', align: 'right' },
+          { text: 'Categoria', value: 'secao', align: 'right', sortable: false },
           { text: 'Quantidade', value: 'qtd', align: 'right', groupable: false, sortable: false }
         ],
-        itens: [
-        ],
+        itens: [],
+        grupos: [],
+        mesas: []
       }
     },
     methods: {
       solicitarPedido(dados){
         console.log(dados)
         if(dados){
+          let pedido ={
+            id_grupo: dados.id_grupo,
+            id_item: dados.pedidos[0].id_item,
+            valor: dados.pedidos[0].preco,
+            obs: dados.obs
+          }
+          Pedidos.solicitarPedido(pedido)
           console.log("pedido salvo")
         }else{
           console.log("fechar dialog")
@@ -100,6 +120,18 @@
     mounted(){
       Itens.verItens().then( res => {
         this.itens = res.data.response
+      }),
+      Mesas.getMesasEmAtendimento().then( res => {
+        let array = res.data.response
+          array.forEach(item => {
+            this.mesas.push(item.id_mesa)
+          });
+      }),
+      Grupos.getGrupos().then( res => {
+        let array = res.data.response
+          array.forEach(item => {
+            this.grupos.push(item)
+          });
       })
     }
   }

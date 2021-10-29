@@ -22,10 +22,24 @@
                     </v-list-item-content>
                 </v-list-item>
             </div>
+            <v-row align="center">
+                <v-col cols="6">
+                    <v-select :items="mesas" outlined v-on:change="habilitarGrupo" label="Selecione a Mesa">
+                    </v-select>
+                </v-col>
+                <v-col cols="6">
+                    <v-select :items="grupo_atual" :disabled="desabilitar" v-on:change="selecionarGrupo" outlined label="Selecione o Grupo">
+                    </v-select>
+                </v-col>
+                <v-col cols="12">
+                    <v-textarea outlined v-on:change="receberObs" label="Observações"></v-textarea>
+                </v-col>
+        </v-row>
         </v-card-text>
 
         <v-divider></v-divider>
 
+        
         <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="default" @click="emitClick(false)">
@@ -39,16 +53,48 @@
 </template>
 <script>
 export default {
-    props:["itens"],
+    props:["itens", "grupos", "mesas"],
+    data:() => {
+        return {
+            grupo_atual: [],
+            desabilitar: true,
+            id_grupo: '',
+            obs: ''
+        }
+        
+    },
     methods: {
         emitClick() {
-            let dados = this.itens.reduce((dados, item) =>{
+            let array = this.itens.reduce((array, item) =>{
                 if(item.qtd > 0){
-                    dados.push(item)
+                    let i = 0
+                    while(i < item.qtd){
+                        array.push(item)
+                        i++
+                    }
                 }
-                return dados;
+                return array;
             }, []);
+            let dados = { id_grupo: this.id_grupo, obs: this.obs, pedidos: array}
             this.$emit('emit-click', dados);
+        },
+        habilitarGrupo(valor){
+            this.grupo_atual = []
+            this.grupos.map((grupos)=>{
+                if(valor == grupos.id_mesa)
+                    this.grupo_atual.push(grupos.id)
+            })
+            if(this.grupo_atual.length > 0)
+                this.desabilitar = false
+            else
+                this.desabilitar = true
+        },
+        selecionarGrupo(valor){
+            this.id_grupo = valor
+        }
+        ,
+        receberObs(valor){
+            this.obs = valor
         }
     }
 }

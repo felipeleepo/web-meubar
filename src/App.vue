@@ -18,6 +18,39 @@
         dense
         nav
       >
+        <v-list-item to="/cardapio">
+          <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-title>Início</v-list-item-title>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-list-item to="/">
+          <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-title>Mesas</v-list-item-title>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-list-group
+          :value="true"
+          prepend-icon="mdi-image"
+          no-action
+        >
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title>Pedidos</v-list-item-title>
+            </v-list-item-content>
+          </template>
+          <v-list-item to="/pedidos">
+            <v-list-item-title>Solicitar</v-list-item-title>
+          </v-list-item>
+
+        </v-list-group>
+        <v-divider></v-divider>
+      <!--</v-list-item>
         <v-list-item
           v-for="item in items"
           :key="item.title"
@@ -31,7 +64,7 @@
           <v-list-item-content>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
-        </v-list-item>
+        </v-list-item>-->
       </v-list>
     </v-navigation-drawer>
 
@@ -53,9 +86,13 @@
       { drawer: null,
         items: 
           [
-            { title: 'Mesas', icon: 'mdi-view-dashboard', to: '/' },
-            { title: 'Pedidos', icon: 'mdi-image', to: '/pedidos' },
-            { title: 'About', icon: 'mdi-help-box', to: '/cardapio' },
+            { title: 'Mesas', icon: 'mdi-view-dashboard', to: '/', id: 2 },
+            { title: 'Solicitar', icon: 'mdi-image', to: '/pedidos', id: 1 },
+            { title: 'About', icon: 'mdi-help-box', to: '/cardapio', id: 2 },
+          ],
+          menus: [
+            { name: "Pedidos", id: 1, icon: 'mdi-view-dashboard',},
+            { name: "Mesas", id: 2, icon: 'mdi-view-dashboard',}
           ] 
         })
   }

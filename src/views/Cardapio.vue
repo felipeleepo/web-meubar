@@ -16,6 +16,15 @@
           <v-spacer></v-spacer>
         </v-toolbar>
       </template>
+      <template v-slot:group.header="{ group, headers, toggle, isOpen }">
+            <td :colspan="headers.length">
+                <v-btn @click="toggle" x-small icon :ref="group">
+                    <v-icon v-if="isOpen">mdi-plus</v-icon>
+                    <v-icon v-else>mdi-minus</v-icon>
+                </v-btn>
+                <span class="mx-5 font-weight-bold">{{ group }}</span>
+            </td> 
+        </template>
 
     </v-data-table>
 
@@ -54,7 +63,7 @@
             valor: 2.50
           },
           {
-            nome: 'Sertanjo',
+            nome: 'Sertanejo',
             Categoria: 'Caldos',
             valor: 2.50
           }
