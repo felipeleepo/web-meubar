@@ -6,5 +6,8 @@ export default {
     },
     solicitarPedido : (pedido) => {
         return http.post('pedidos', pedido)
+    },
+    visualizarPedidos : () => {
+        return http.get('pedidos/visualizar')
     }
 }

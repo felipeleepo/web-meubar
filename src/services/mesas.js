@@ -2,9 +2,9 @@ import { http } from "./config";
 
 export default {
     getMesa : () => {
-        return http.get('mesas')
+        return http.get('mesas/visualizar')
     },
     getMesasEmAtendimento : () => {
-        return http.get('mesas/1')
+        return http.get('mesas/atendimento')
     }
 }

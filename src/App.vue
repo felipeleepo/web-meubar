@@ -44,8 +44,11 @@
               <v-list-item-title>Pedidos</v-list-item-title>
             </v-list-item-content>
           </template>
-          <v-list-item to="/pedidos">
+          <v-list-item to="/pedidos/solicitar">
             <v-list-item-title>Solicitar</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/pedidos/visualizar">
+            <v-list-item-title>Visualizar</v-list-item-title>
           </v-list-item>
 
         </v-list-group>
