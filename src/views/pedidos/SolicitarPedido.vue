@@ -82,12 +82,10 @@
     },
     methods: {
       solicitarPedido(dados){
-        console.log(dados)
         if(dados){
           let pedido ={
             id_grupo: dados.id_grupo,
-            id_item: dados.pedidos[0].id_item,
-            valor: dados.pedidos[0].preco,
+            pedidos: dados.pedidos,
             obs: dados.obs
           }
           Pedidos.solicitarPedido(pedido)
