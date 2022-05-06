@@ -2,7 +2,7 @@
   <div>
     <v-row dense>
       <v-col v-for="card in cards" :key="card.id_mesa">
-        <v-card class="mx-auto" min-width="60" min-height="217" color="grey lighten-5">
+        <v-card class="mx-auto"  color="grey lighten-5">
           <v-responsive :aspect-ratio="3/1">
           <v-card-title class="text-h5">
             Mesa #{{card.id_mesa}}
@@ -18,34 +18,51 @@
           </v-card-title>
           <v-divider></v-divider>
           <v-card-text>
-            <v-row v-if="card.status==2">
-              <v-col cols="6">
+            <v-row v-if="card.status != '2'">
+              <v-col align="center">
                 <v-list-item>
-                  <v-list-item-content v-if="card.grupo == '1'">
-                    <v-list-item-title>{{card.grupo}} Grupo</v-list-item-title>
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      Nenhum cliente ou pedido solicitado
+                    </v-list-item-title>
                   </v-list-item-content>
-                  <v-list-item-content v-else>
-                     <v-list-item-title>{{card.grupo}} Grupos</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-col>
-              <v-col cols="6">
-                <v-list-item>
-                  <v-list-item-content v-if="card.quantidade == '1'">
-                      <v-list-item-title>{{card.quantidade}} Pessoa</v-list-item-title>
-                    </v-list-item-content>
-                    <v-list-item-content v-else>
-                      <v-list-item-title>{{card.quantidade}} Pessoas</v-list-item-title>
-                    </v-list-item-content>
                 </v-list-item>
               </v-col>
             </v-row>
-            
+            <v-row v-else>
+              <v-col cols="6" align="center">
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      <div v-if="card.grupo == '1'"><b>{{card.grupo}} Grupo</b></div>
+                      <div v-else><b>{{card.grupo}} Grupos</b></div>
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-col>
+              <v-col cols="6" align="center">
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      <div v-if="card.quantidade == '1'"><b>{{card.quantidade}} Pessoa</b></div>
+                      <div v-else><b>{{card.quantidade}} Pessoas</b></div>
+                      </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-col>
+            </v-row>
           </v-card-text>
           <v-card-actions>
-            <v-btn>
-              Detalhes
-            </v-btn>
+            <v-row>
+              <v-col>
+                <v-btn block v-if="card.status == '1'" color="accent">
+                  Abrir
+                </v-btn>
+                <v-btn v-else block color="secondary">
+                  Detalhes
+                </v-btn>
+              </v-col>
+            </v-row>
           </v-card-actions>
           </v-responsive>
         </v-card>
