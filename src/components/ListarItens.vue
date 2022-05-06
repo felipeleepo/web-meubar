@@ -24,11 +24,11 @@
             </div>
             <v-row align="center">
                 <v-col cols="6">
-                    <v-select :items="mesas" outlined v-on:change="habilitarGrupo" label="Selecione a Mesa">
+                    <v-select :items="grupos" item-text="id_mesa" outlined v-on:change="habilitarGrupo" label="Selecione a Mesa">
                     </v-select>
                 </v-col>
                 <v-col cols="6">
-                    <v-select :items="grupo_atual" :disabled="desabilitar" v-on:change="selecionarGrupo" outlined label="Selecione o Grupo">
+                    <v-select :items="grupo_atual" item-text="descricao" :disabled="desabilitar" v-on:change="selecionarGrupo" outlined label="Selecione um Grupo">
                     </v-select>
                 </v-col>
                 <v-col cols="12">
@@ -53,7 +53,7 @@
 </template>
 <script>
 export default {
-    props:["itens", "grupos", "mesas"],
+    props:["itens", "grupos"],
     data:() => {
         return {
             grupo_atual: [],
@@ -82,15 +82,15 @@ export default {
             this.grupo_atual = []
             this.grupos.map((grupos)=>{
                 if(valor == grupos.id_mesa)
-                    this.grupo_atual.push(grupos.id)
-            })
+                    this.grupo_atual.push({id: grupos.id, descricao: grupos.descricao})
+            })         
             if(this.grupo_atual.length > 0)
                 this.desabilitar = false
             else
                 this.desabilitar = true
         },
         selecionarGrupo(valor){
-            this.id_grupo = valor
+            this.id_grupo = valor.id
         }
         ,
         receberObs(valor){

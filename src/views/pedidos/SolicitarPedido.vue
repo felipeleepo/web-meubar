@@ -23,7 +23,7 @@
                         </v-btn>
                     </template>
 
-                    <ListarItens :itens="itens" :grupos="grupos" :mesas="mesas" @emit-click="solicitarPedido"/>
+                    <ListarItens :itens="itens" :grupos="grupos" @emit-click="solicitarPedido"/>
                 </v-dialog>
     
             </v-toolbar>
@@ -58,7 +58,7 @@
 
 <script>
   import ListarItens from '../../components/ListarItens.vue'
-  import Itens from '../../services/pedidos.js'
+  import Itens from '../../services/itens.js'
   import Mesas from '../../services/mesas.js'
   import Grupos from '../../services/grupos.js'
   import Pedidos from '../../services/pedidos.js'
@@ -116,7 +116,7 @@
       }
     },
     mounted(){
-      Itens.verItens().then( res => {
+      Itens.verItensAtivos().then( res => {
         this.itens = res.data.response
       }),
       Mesas.getMesasEmAtendimento().then( res => {
