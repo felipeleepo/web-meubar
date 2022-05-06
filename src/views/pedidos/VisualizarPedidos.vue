@@ -5,7 +5,7 @@
       :headers="headers"
       :items="pedidos"
       item-key="nome"
-      sort-by="nome"
+      :sort-by="[data_pedido, id_mesa]"
       group-by="id_mesa"
       show-group-by 
       class="elevation-1"
