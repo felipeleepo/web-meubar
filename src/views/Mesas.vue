@@ -21,18 +21,22 @@
             <v-row v-if="card.status==2">
               <v-col cols="6">
                 <v-list-item>
-                  <v-list-item-icon>
-                    <v-icon dense>mdi-account-group</v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-subtitle>{{card.status}} pessoa(s)</v-list-item-subtitle>
+                  <v-list-item-content v-if="card.grupo == '1'">
+                    <v-list-item-title>{{card.grupo}} Grupo</v-list-item-title>
+                  </v-list-item-content>
+                  <v-list-item-content v-else>
+                     <v-list-item-title>{{card.grupo}} Grupos</v-list-item-title>
+                  </v-list-item-content>
                 </v-list-item>
               </v-col>
               <v-col cols="6">
                 <v-list-item>
-                  <v-list-item-icon>
-                    <v-icon dense>mdi-account-group</v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-subtitle>{{card.status}} pessoa(s)</v-list-item-subtitle>
+                  <v-list-item-content v-if="card.quantidade == '1'">
+                      <v-list-item-title>{{card.quantidade}} Pessoa</v-list-item-title>
+                    </v-list-item-content>
+                    <v-list-item-content v-else>
+                      <v-list-item-title>{{card.quantidade}} Pessoas</v-list-item-title>
+                    </v-list-item-content>
                 </v-list-item>
               </v-col>
             </v-row>
