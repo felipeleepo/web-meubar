@@ -25,6 +25,7 @@
             dark
             label 
             outlined
+            small
           >
             {{ item.status }}
           </v-chip>
@@ -80,12 +81,14 @@
     },
     methods:{
       getColor(item){
-          if(item == "Entregue")
-            return "green"
-          else if (item == "Produzido")
-            return "primary"
-          else
+          if (item == "Solicitado")
             return "warning"
+          else if(item == "Entregue")
+            return "green"
+          else if (item == "Cancelado")
+            return ""
+          else
+            return "error"
       },
       exibirEditar(item){
         if (item.status == "Solicitado")

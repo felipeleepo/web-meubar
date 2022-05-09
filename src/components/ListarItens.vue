@@ -28,7 +28,7 @@
                     </v-select>
                 </v-col>
                 <v-col cols="6">
-                    <v-select :items="grupo_atual" item-text="descricao" :disabled="desabilitar" v-on:change="selecionarGrupo" outlined label="Selecione um Grupo">
+                    <v-select :items="grupo_atual" item-text="descricao" item-value="id" :disabled="desabilitar" v-on:change="selecionarGrupo" outlined label="Selecione um Grupo">
                     </v-select>
                 </v-col>
                 <v-col cols="12">
@@ -90,7 +90,7 @@ export default {
                 this.desabilitar = true
         },
         selecionarGrupo(valor){
-            this.id_grupo = valor.id
+            this.id_grupo = valor
         }
         ,
         receberObs(valor){
