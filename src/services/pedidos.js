@@ -9,5 +9,8 @@ export default {
     },
     visualizarPedidos : () => {
         return http.get('pedidos/visualizar')
+    },
+    visualizarPedidosCozinha : () => {
+        return http.get('pedidos/cozinha')
     }
 }

@@ -4,6 +4,7 @@ import Mesas from '../views/Mesas.vue'
 import SolicitarPedido from '../views/pedidos/SolicitarPedido.vue'
 import VisualizarPedidos from '../views/pedidos/VisualizarPedidos.vue'
 import Cardapio from '../views/Cardapio.vue'
+import Cozinha from '../views/Cozinha.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/cardapio',
     name: 'Cardápio',
     component: Cardapio
+  },
+  {
+    path: '/cozinha',
+    name: 'Cozinha',
+    component: Cozinha
   }
 ]
 

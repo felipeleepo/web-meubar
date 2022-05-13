@@ -4,7 +4,7 @@
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h6">
-            Application
+            MeuBAR
           </v-list-item-title>
           <v-list-item-subtitle>
             subtext
@@ -53,6 +53,14 @@
 
         </v-list-group>
         <v-divider></v-divider>
+          <v-list-item to="/cozinha">
+            <v-list-item-icon>
+                <v-icon>mdi-home</v-icon>
+              </v-list-item-icon>
+
+              <v-list-item-title>Cozinha</v-list-item-title>
+          </v-list-item>
+        <v-divider></v-divider>
       <!--</v-list-item>
         <v-list-item
           v-for="item in items"
@@ -74,7 +82,7 @@
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>MeuBAR</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
