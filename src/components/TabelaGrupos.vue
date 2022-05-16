@@ -13,14 +13,14 @@
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on, attrs }">
             <v-row class="d-flex justify-end">
-              <v-col
-                ><v-btn color="default" @click="sair"> Cancelar </v-btn></v-col
-              >
+              <v-col>
+                <v-btn color="default" @click="sair"> Cancelar </v-btn>
+              </v-col>
               <v-col>
                 <v-btn color="primary" dark v-bind="attrs" v-on="on">
                   Novo
-                </v-btn></v-col
-              >
+                </v-btn>
+              </v-col>
             </v-row>
           </template>
           <v-card>
@@ -89,6 +89,7 @@ export default {
     dialog: false,
     dialogDelete: false,
     editedIndex: -1,
+    oldItemQtd: 0,
     editedItem: {
       descricao: "",
       qtd: "",
@@ -138,6 +139,7 @@ export default {
     initialize() {},
 
     editItem(item) {
+      this.oldItemQtd = parseInt(item.qtd);
       this.editedIndex = this.itens.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
@@ -153,7 +155,6 @@ export default {
       this.itens.splice(this.editedIndex, 1);
       this.closeDelete();
       this.$emit("emit-click", this.editedItem, false);
-
     },
 
     close() {
@@ -175,10 +176,12 @@ export default {
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.itens[this.editedIndex], this.editedItem);
+        this.editedItem.oldItemQtd = parseInt(this.editedItem.qtd) - this.oldItemQtd;
       } else {
+        (this.editedItem.id = null), (this.editedItem.id_mesa = this.var);
         this.itens.push(this.editedItem);
       }
-      this.$emit("emit-click", this.itens, true);
+      this.$emit("emit-click", this.editedItem, true);
       this.close();
     },
 

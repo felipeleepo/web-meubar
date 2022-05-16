@@ -131,24 +131,31 @@ export default {
     },
     updateGrupos(dados, update) {
       if (dados) {
-        let grupo_aux = 0;
+        
         let pessoa_aux = 0;
         if (update) {
-          dados.forEach((element) => {
-            Grupo.updateGrupos(element);
-            grupo_aux++;
-            pessoa_aux += parseInt(element.qtd);
-          });
+          dados.status = true;
+          Grupo.updateGrupos(dados);
+          if (dados.id == null) {
+            pessoa_aux = parseInt(dados.qtd);
 
-          //atualiza dados da mesa
-          this.cards.forEach((e) => {
-            if (e.id_mesa == this.id_mesa) {
-              e.grupo = grupo_aux;
-              e.quantidade = pessoa_aux;
-            }
-          });
-        }else{
-          dados.status = "2"
+            //atualiza dados da mesa
+            this.cards.forEach((e) => {
+              if (e.id_mesa == this.id_mesa) {
+                e.grupo++;
+                e.quantidade += pessoa_aux;
+              }
+            });
+          } else {
+            this.cards.forEach((e) => {
+              if (e.id_mesa == this.id_mesa) {
+                e.quantidade = parseInt(e.quantidade)
+                e.quantidade += parseInt(dados.oldItemQtd)
+              }
+            });
+          }
+        } else {
+          dados.status = "2";
           Grupo.updateGrupos(dados);
           // atualizando dados da mesa
           this.cards.forEach((e) => {
@@ -158,7 +165,6 @@ export default {
             }
           });
         }
-
       }
       this.grupos = [];
       this.dialog = false;
